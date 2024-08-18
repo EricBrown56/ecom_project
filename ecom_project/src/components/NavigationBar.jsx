@@ -14,7 +14,7 @@ function NavigationBar() {
                     <Nav.Link as={NavLink} to='/Customers' activeclassname='active'>
                         Customers
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to='/products' activeclassname='active'>
+                    <Nav.Link as={NavLink} to='/Products' activeclassname='active'>
                         Products
                     </Nav.Link>
                     <Nav.Link as={NavLink} to='/' activeclassname='active'>
