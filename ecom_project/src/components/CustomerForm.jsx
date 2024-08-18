@@ -25,7 +25,7 @@ class CustomerForm extends Component {
             this.setState({ isLoading: true, errors: null });
 
             const customerData = {
-                name: this.state.name.trim(),
+                customer_name: this.state.name.trim(),
                 email: this.state.email.trim(),
                 phone: this.state.phone.trim()
             };
@@ -75,7 +75,7 @@ class CustomerForm extends Component {
 
     render() {
 
-        const { name, email, phone, isLoading, showSuccessModal, error, errors } = this.state;
+        const { customer_name, email, phone, isLoading, showSuccessModal, error, errors } = this.state;
 
         return (
             <Container>
@@ -89,7 +89,7 @@ class CustomerForm extends Component {
                         <Form.Control
                             type='text'
                             name='name'
-                            value={name}
+                            value={customer_name}
                             onChange={this.handleChange}
                             isInvalid={errors.name} />
                             {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}

@@ -18,7 +18,7 @@ function NotFound() {
         return (
         <div>
             <h2>404 - Not Found</h2>
-            <p>Sorry, the world cannot be saved today ):</p>
+            <p>Uh oh! Something went wrong.</p>
             <p>You will be redirected in {countDown} seconds or you can.....</p>
             <p><Link to="/">Go Home!</Link></p>
         </div>
