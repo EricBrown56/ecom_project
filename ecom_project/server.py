@@ -18,8 +18,8 @@ class CustomerSchema(ma.Schema):
     customer_name = fields.String(required=True)
     email = fields.String(required=True)
     phone = fields.String(required=True)
-    user_name = fields.String()
-    password = fields.String()
+    user_name = fields.String(required=False)
+    password = fields.String(required=False)
 
     class Meta:
         fields = ("id", "customer_name", "email", "phone", "user_name", "password")

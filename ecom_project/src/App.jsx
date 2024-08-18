@@ -13,7 +13,7 @@ function App() {
       <NavigationBar />
       <HomePage />
 
-      <NotFound />
+     
     </>
   )
 }
