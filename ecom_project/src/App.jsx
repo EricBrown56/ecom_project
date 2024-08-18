@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar';
 import NotFound from './components/NotFound';
 import HomePage from './components/HomePage';
 import CustomerForm from './components/CustomerForm';
+import ViewCustomers from './components/ViewCustomers';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/Add-Customer' element={<CustomerForm />} />
+        <Route path='/Customers' element={<ViewCustomers />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       

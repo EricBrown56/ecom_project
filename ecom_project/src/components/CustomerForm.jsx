@@ -57,8 +57,8 @@ class CustomerForm extends Component {
     };
 
     handleChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+        const { customer_name, value } = event.target;
+        this.setState({ [customer_name]: value });
     };
 
     closeModal = () => {
