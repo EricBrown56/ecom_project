@@ -31,7 +31,7 @@ const ViewCustomers = () => {
             {customers.map(customer => (
                 <div key={customer.id} className="customer">
                     <br/>
-                    <Link to={`/customers/${customer.id}`}>{customer.customer_name}</Link>
+                    <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
                 </div>
             ))}       
             

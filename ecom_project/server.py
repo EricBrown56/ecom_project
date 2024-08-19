@@ -15,14 +15,14 @@ CORS(app)
 # Define the Customer schema
 class CustomerSchema(ma.Schema):
     id = fields.String(required=False)
-    customer_name = fields.String(required=True)
+    name = fields.String(required=True)
     email = fields.String(required=True)
     phone = fields.String(required=True)
     user_name = fields.String(required=False)
     password = fields.String(required=False)
 
     class Meta:
-        fields = ("id", "customer_name", "email", "phone", "user_name", "password")
+        fields = ("id", "name", "email", "phone", "user_name", "password")
 
 customer_schema = CustomerSchema()
 customers_schema = CustomerSchema(many=True)
@@ -156,10 +156,14 @@ def add_customer():
         cursor = conn.cursor()
 
         # New customer details
-        new_customer = (customer_data['customer_name'], customer_data['email'], customer_data['phone'], customer_data['user_name'], generate_password_hash(customer_data['password']))
+        new_customer = (customer_data['name'], customer_data['email'], customer_data['phone'], customer_data['user_name'], generate_password_hash(customer_data['password']))
 
+    # 
+       
         # SQL query to add new customer
-        query = "INSERT INTO Customer (customer_name, email, phone, user_name, password) VALUES (%s, %s, %s, %s, %s)"
+        query = "INSERT INTO Customer (name, email, phone, user_name, password) VALUES (%s, %s, %s, %s, %s)"
+
+        # 
 
         # Executing the query
         cursor.execute(query, new_customer)
@@ -193,10 +197,10 @@ def update_customer(id):
         cursor = conn.cursor()
 
         # Updated customer details
-        updated_customer = (customer_data['customer_name'], customer_data['email'], customer_data['phone'], id)
+        updated_customer = (customer_data['name'], customer_data['email'], customer_data['phone'], id)
 
         # SQL query to update the customer's details
-        query = "UPDATE Customer SET customer_name = %s, email = %s, phone = %s WHERE id = %s"
+        query = "UPDATE Customer SET name = %s, email = %s, phone = %s WHERE id = %s"
 
         # Executing the query
         cursor.execute(query, updated_customer)

@@ -10,6 +10,8 @@ class CustomerForm extends Component {
             name: '',
             email: '',
             phone: '',
+            user_name: '',
+            password: '',
             errors: {},
             isLoading: false,
             error: null,
@@ -21,22 +23,24 @@ class CustomerForm extends Component {
         event.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
-
+    
             this.setState({ isLoading: true, errors: null });
-
+    
             const customerData = {
-                customer_name: this.state.name.trim(),
+                name: this.state.name.trim(),
                 email: this.state.email.trim(),
-                phone: this.state.phone.trim()
+                phone: this.state.phone.trim(),
+                user_name: this.state.user_name.trim(),
+                password: this.state.password.trim()
             };
-
+    
             axios.post('http://127.0.0.1:5000/customers', customerData)
                 .then(() => {
                     this.setState({
                         showSuccessModal: true,
                         isLoading: false,
                     })
-
+    
                 })
                 .catch(error => {
                     console.error('Error submitting form:', error);
@@ -48,17 +52,19 @@ class CustomerForm extends Component {
     };
 
     validateForm = () => {
-        const { name, email, phone } = this.state;
+        const { name, email, phone, user_name, password } = this.state;
         const errors = {};
         if (!name) errors.name = 'Name is required';
         if (!email) errors.email = 'Email is required';
         if (!phone) errors.phone = 'Phone is required';
+        if (!user_name) errors.user_name = 'User Name is required';
+        if (!password) errors.password = 'Password is required';
         return errors;
     };
 
     handleChange = (event) => {
-        const { customer_name, value } = event.target;
-        this.setState({ [customer_name]: value });
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     };
 
     closeModal = () => {
@@ -67,6 +73,8 @@ class CustomerForm extends Component {
             name: '',
             email: '',
             phone: '',
+            user_name: '',
+            password: '',
             errors: {},
             selectedCustomerId: null
         });
@@ -75,7 +83,7 @@ class CustomerForm extends Component {
 
     render() {
 
-        const { customer_name, email, phone, isLoading, showSuccessModal, error, errors } = this.state;
+        const { name, email, phone, user_name, password, isLoading, showSuccessModal, error, errors } = this.state;
 
         return (
             <Container>
@@ -89,8 +97,9 @@ class CustomerForm extends Component {
                         <Form.Control
                             type='text'
                             name='name'
-                            value={customer_name}
+                            value={name}
                             onChange={this.handleChange}
+                            placeholder='Enter name'
                             isInvalid={errors.name} />
                             {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
                     </Form.Group>
@@ -102,6 +111,7 @@ class CustomerForm extends Component {
                             name='email'
                             value={email}
                             onChange={this.handleChange}
+                            placeholder='Enter email'
                             isInvalid={errors.email} />
                             {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
                     </Form.Group>
@@ -113,8 +123,33 @@ class CustomerForm extends Component {
                             name='phone'
                             value={phone}
                             onChange={this.handleChange}
+                            placeholder='Enter phone number'
                             isInvalid={errors.phone} />
                             {errors.phone && <div style={{ color: 'red' }}>{errors.phone}</div>}
+                    </Form.Group>
+
+                    <Form.Group controlId='formGroupName'>
+                        <Form.Label>User Name</Form.Label>
+                        <Form.Control
+                            type='text'
+                            name='user_name'
+                            value={user_name}
+                            onChange={this.handleChange}
+                            placeholder='Enter user name'
+                            isInvalid={errors.user_name} />
+                            {errors.user_name && <div style={{ color: 'red' }}>{errors.user_name}</div>}
+                    </Form.Group>
+
+                    <Form.Group controlId='formGroupName'>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            name='password'
+                            value={password}
+                            onChange={this.handleChange}
+                            placeholder='Enter password'
+                            isInvalid={errors.password} />
+                            {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
                     </Form.Group>
 
                     <Button variant='primary' type='submit' className='mt-3 mb-3' >Submit</Button>
