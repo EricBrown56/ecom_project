@@ -104,7 +104,7 @@ class CustomerForm extends Component {
                             {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
                     </Form.Group>
 
-                    <Form.Group controlId='formGroupName'>
+                    <Form.Group controlId='formGroupEmail'>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
                             type='email'
@@ -116,7 +116,7 @@ class CustomerForm extends Component {
                             {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
                     </Form.Group>
 
-                    <Form.Group controlId='formGroupName'>
+                    <Form.Group controlId='formGroupPhone'>
                         <Form.Label>Phone</Form.Label>
                         <Form.Control
                             type='tel'
@@ -128,7 +128,7 @@ class CustomerForm extends Component {
                             {errors.phone && <div style={{ color: 'red' }}>{errors.phone}</div>}
                     </Form.Group>
 
-                    <Form.Group controlId='formGroupName'>
+                    <Form.Group controlId='formGroupUserName'>
                         <Form.Label>User Name</Form.Label>
                         <Form.Control
                             type='text'
@@ -140,7 +140,7 @@ class CustomerForm extends Component {
                             {errors.user_name && <div style={{ color: 'red' }}>{errors.user_name}</div>}
                     </Form.Group>
 
-                    <Form.Group controlId='formGroupName'>
+                    <Form.Group controlId='formGroupPword'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type='password'

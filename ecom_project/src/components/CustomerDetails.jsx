@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Component } from 'react';
 import axios from 'axios';
 
 function CustomerDetails() {
@@ -15,7 +16,7 @@ function CustomerDetails() {
                 setCustomer(response.data[0]);
                 setLoading(false);
             } catch(error){
-                console.error('Error fetching hero: ', error);
+                console.error('Error fetching customer: ', error);
             }
         }
         fetchCustomer();
@@ -30,7 +31,28 @@ function CustomerDetails() {
         <div>
             <Link to="/customers">Back to all customers</Link>
             <h3>{customer.name}</h3>
-            
+            <form onSubmit={this.handleSubmit}>
+                <h3>Add/Edit Customer</h3>
+                <label>
+                    Name:<br/>
+                    <input type="text" name="name" value={name} onChange={this.handleChange} />
+                    {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
+                </label>
+                <br />
+                <label>
+                    Email:<br/>
+                    <input type="email" name="email" value={email} onChange={this.handleChange} />
+                    {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
+                </label>
+                <br />
+                <label>
+                    Phone:<br/>
+                    <input type="tel" name="phone" value={phone} onChange={this.handleChange} />
+                    {errors.phone && <div style={{ color: 'red' }}>{errors.phone}</div>}
+                </label>
+                <br />
+                <button type="submit">Submit</button>
+            </form>
             
 
            
