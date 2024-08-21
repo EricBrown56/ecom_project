@@ -8,7 +8,8 @@ import HomePage from './components/HomePage';
 import CustomerForm from './components/CustomerForm';
 import ViewCustomers from './components/ViewCustomers';
 import CustomerDetails from './components/CustomerDetails';
-
+import AddProduct from './components/AddProduct';
+import ViewProducts from './components/ViewProducts';
 
 function App() {
   
@@ -22,6 +23,8 @@ function App() {
         <Route path='/Add-Customer' element={<CustomerForm />} />
         <Route path='/Customers' element={<ViewCustomers />} />
         <Route path='/Customers/:id' element={<CustomerDetails />} />
+        <Route path='/Products' element={<ViewProducts />} />
+        <Route path='/Add_Product' element={<AddProduct />} />
 
         <Route path='*' element={<NotFound />} />
       </Routes>

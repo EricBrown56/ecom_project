@@ -1,38 +1,128 @@
-import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Component } from 'react';
 import axios from 'axios';
 
-function CustomerDetails() {
-    const { id } = useParams();
-    const [customer, setCustomer] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchCustomer = async () => {
-            try {
-                const response = await axios.get(`http://127.0.0.1:5000/customers/${id}`);
-                console.log(response.data[0]);
-                setCustomer(response.data[0]);
-                setLoading(false);
-            } catch(error){
-                console.error('Error fetching customer: ', error);
-            }
-        }
-        fetchCustomer();
-
-    }, [id])
-
-    if(loading){
-        return <h3>Loading customer...</h3>
+class CustomerDetails extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            phone: '',
+            user_name: '',
+            password: '',
+            errors: {},
+            selectedCustomerId: null
+        };
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.customerId !== this.props.customerId) {
+            this.setState({selectedCustomerId: this.props.customerId});
+            if (this.props.customerId) {
+                axios.get(`http://127.0.0.1:5000/customers/${this.props.customerId}`)
+                    .then(response => {
+                        const customerData = response.data[0];
+
+                        this.setState({
+                            name: customerData.name,
+                            email: customerData.email,
+                            phone: customerData.phone,
+                            user_name: customerData.user_name,
+                            password: customerData.password
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Server Error', error);
+                    })
+            }else {
+                this.setState({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    user_name: '',
+                    password: ''
+                });
+            }
+        }
+    }
+
+    handleChange = (event) => {
+        const {name, value} = event.target;
+        this.setState({[name]: value});
+        
+    }
+
+    validateForm = () => {
+        const { name, email, phone } = this.state;
+        const errors = {};
+        if (!name) errors.name = 'Name cannot be blank';
+        if (!email) errors.email = 'Email cannot be blank';
+        if (!phone) errors.phone = 'Phone cannot be blank';
+        // if (!user_name) errors.user_name = 'User Name cannot be blank';
+        // if (!password) errors.password = 'Password cannot be blank';
+        
+        return errors;
+    }
+    
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const errors = this.validateForm();
+        if (Object.keys(errors).length === 0) {
+            const customerData = {
+                name: this.state.name.trim(),
+                email: this.state.email.trim(),
+                phone: this.state.phone.trim(),
+                user_name: this.state.user_name.trim(),
+                password: this.state.password.trim()
+            }
+            
+
+            const apiUrl = this.state.selectedCustomerId ? 
+                `http://127.0.0.1:5000/customers/${this.state.selectedCustomerId}` :
+                `http://127.0.0.1:5000/customers`;
+
+            const httpMethod = this.state.selectedCustomerId ? axios.put : axios.post;
+
+            httpMethod(apiUrl, customerData)
+                .then(() => {
+                    // this is where we run updateCustomerList in App
+                    // which then calls fetchCustomers() from CustomerList
+                    this.props.onUpdateCustomerList();
+
+                    this.setState({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        user_name: '',
+                        password: '',
+                        errors: {},
+                        selectedCustomerId: null
+                    })
+                    
+                })
+
+                    .catch(error => {
+                        console.error('Server Error', error);
+                })
+            
+        }else {
+            // if key and value are the same, you can just write the key
+            this.setState({errors});
+        }
+    }
+    
+
+    render() {
+        const { name, email, phone, user_name, password, errors } = this.state;
+       
+    
     return (
         <div>
             <Link to="/customers">Back to all customers</Link>
-            <h3>{customer.name}</h3>
+            <br />
             <form onSubmit={this.handleSubmit}>
-                <h3>Add/Edit Customer</h3>
+                <h3>Edit Customer</h3>
                 <label>
                     Name:<br/>
                     <input type="text" name="name" value={name} onChange={this.handleChange} />
@@ -51,15 +141,26 @@ function CustomerDetails() {
                     {errors.phone && <div style={{ color: 'red' }}>{errors.phone}</div>}
                 </label>
                 <br />
-                <button type="submit">Submit</button>
+                <label>
+                    User Name:<br/>
+                    <input type="text" name="user_name" value={user_name} onChange={this.handleChange} />
+                    {errors.user_name && <div style={{ color: 'red' }}>{errors.user_name}</div>}
+                </label>
+                <br />
+                <label>
+                    Password:<br/>
+                    <input type="password" name="password" value={password} onChange={this.handleChange} />
+                    {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
+                </label>
+                <br />
+                <button type="submit">Update</button>
             </form>
             
 
            
         </div>
-    )
+        )
+    }
+
 }
-
-
-
 export default CustomerDetails;

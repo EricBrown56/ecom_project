@@ -1,42 +1,73 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-const ViewCustomers = () => {
-    const [customers, setCustomers] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchCustomers = async () => {
-            try {
-                const response = await axios.get('http://127.0.0.1:5000/customers');
-                console.log(response.data);
-                setCustomers(response.data);
-                setLoading(false);
-            } catch(error){
-                console.error('Error fetching heroes: ', error);
-            }
-        }
-        fetchCustomers();
-
-    }, [])
-
-    if(loading){
-        return <h3>Loading Customers...</h3>
+class ViewCustomers extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            customers: [],
+            selectedCustomerId: null
+        };
     }
 
-    return (
-        <div>
-            <h3>Customers</h3>
-            {customers.map(customer => (
-                <div key={customer.id} className="customer">
-                    <br/>
-                    <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
-                </div>
-            ))}       
-            
-        </div>
-    )
+    componentDidMount() {
+        this.fetchCustomers();
+    }
+
+    fetchCustomers = () => {
+        axios.get('http://127.0.0.1:5000/customers')
+            .then(response => {
+                console.log(response);
+                this.setState({customers: response.data});
+            })
+            .catch(error => {
+                console.error('Server Error', error);
+            });
+    }
+
+    selectCustomer = (customerId) => {
+        //updating state in CustomerList and App
+        this.setState({selectedCustomerId: customerId});
+        //go to the customer details page
+        
+        
+
+
+    }
+
+    deleteCustomer = (customerId) => {
+        axios.delete(`http://127.0.0.1:5000/customers/${customerId}`)
+            .then(() => {
+                this.fetchCustomers();
+            })
+            .catch(error => {
+                console.error('Server Error', error);
+            });
+    }
+
+    render() {
+
+        const { customers } = this.state;
+        console.log(customers);
+        return (
+            <div className='customer-list'>
+                <h3>Customers</h3>
+                <ul>
+                    {customers.map(customer => (
+                        <li key={customer.id} onClick={() => this.selectCustomer(customer.id)}>
+                            <b>{customer.name}</b><br/>
+                            {customer.email}<br/>
+                            {customer.phone}<br/>
+                            <button onClick={() => this.deleteCustomer(customer.id)}>Delete</button>
+                            <button><Link to={`/customers/${customer.id}`}>View</Link></button>
+                        </li>
+                    ))}
+                </ul>
+
+            </div>
+        )
+    }
 }
 
 export default ViewCustomers;
