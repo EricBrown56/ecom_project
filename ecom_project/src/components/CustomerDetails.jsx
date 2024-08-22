@@ -23,7 +23,7 @@ class CustomerDetails extends Component {
                 axios.get(`http://127.0.0.1:5000/customers/${this.props.customerId}`)
                     .then(response => {
                         const customerData = response.data[0];
-
+                        console.log(customerData)
                         this.setState({
                             name: customerData.name,
                             email: customerData.email,

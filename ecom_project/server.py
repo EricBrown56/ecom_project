@@ -197,10 +197,10 @@ def update_customer(id):
         cursor = conn.cursor()
 
         # Updated customer details
-        updated_customer = (customer_data['name'], customer_data['email'], customer_data['phone'], id)
+        updated_customer = (customer_data['name'], customer_data['email'], customer_data['phone'], customer_data['user_name'], generate_password_hash(customer_data['password']))
 
         # SQL query to update the customer's details
-        query = "UPDATE Customer SET name = %s, email = %s, phone = %s WHERE id = %s"
+        query = "UPDATE Customer SET name = %s, email = %s, phone = %s, user_name = %s, password = %s WHERE id = %s"
 
         # Executing the query
         cursor.execute(query, updated_customer)
