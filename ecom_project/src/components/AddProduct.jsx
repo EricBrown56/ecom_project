@@ -48,9 +48,9 @@ class Products extends Component {
         const { product_name, price } = this.state;
         const errors = {};
         if (!product_name) {errors.product_name = 'Product name is required'}
-        else {errors.product_name = ''}
+        // else {errors.product_name = ''}
         if (!price) errors.price = 'Price information is required'
-        else {errors.price = ''}
+        // else {errors.price = ''}
         return errors;
     };
 
@@ -90,7 +90,7 @@ class Products extends Component {
                             value={product_name}
                             onChange={this.handleChange}
                             placeholder= 'Enter Product Name'
-                            isInvalid={errors.product_name ? true : false} />
+                            />
                             {errors.product_name && <div style={{ color: 'red' }}>{errors.product_name}</div>}
                     </Form.Group>
 
@@ -102,7 +102,7 @@ class Products extends Component {
                             value={price}
                             onChange={this.handleChange}
                             placeholder='Enter Price'
-                            isInvalid={errors.price ? true : false} />
+                             />
                             {errors.price && <div style={{ color: 'red' }}>{errors.price}</div>}
                     </Form.Group>
 
