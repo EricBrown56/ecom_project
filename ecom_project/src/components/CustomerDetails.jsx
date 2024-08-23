@@ -40,20 +40,23 @@ function CustomerDetails() {
     }
 
     const validateForm = () => {
-        const { name, email, phone } = customer;
+        const { name, email, phone, user_name, password } = customer;
         const errors = {};
         if (!name) errors.name = 'Name cannot be blank';
         if (!email) errors.email = 'Email cannot be blank';
         if (!phone) errors.phone = 'Phone cannot be blank';
+        if (!user_name) errors.user_name = 'User Name cannot be blank';
+        if (!password) errors.password = 'Password cannot be blank';
         return errors;
     }
 
     const handleSubmit = (event) => {
+        console.log(customer);
         event.preventDefault();
         const errors = validateForm();
         if (Object.keys(errors).length === 0) {
-            const apiUrl = id ? `http://127.0.0.1:5000/customers/${id}` : `http://127.0.0.1:5000/customers`;
-            const httpMethod = id ? axios.put : axios.post;
+            const apiUrl =  `http://127.0.0.1:5000/customers/${id}`;
+            const httpMethod = axios.put;
 
             httpMethod(apiUrl, customer)
                 .then(() => {
@@ -82,6 +85,7 @@ function CustomerDetails() {
                 <p><strong>Email:</strong> {customer.email || 'N/A'}</p>
                 <p><strong>Phone:</strong> {customer.phone || 'N/A'}</p>
                 <p><strong>User Name:</strong> {customer.user_name || 'N/A'}</p>
+                <p><strong>Password:</strong> { customer.password || 'N/A'}</p>
                 
             </div>
         );
@@ -90,12 +94,12 @@ function CustomerDetails() {
     }
 
     return (
-        <div>
+        <div className='mt-5'>
             <Link to="/Customers">Back to all customers</Link>
             <br />
-            <h3>Customer Details</h3>
+            <h3 className='mb-5'>Welcome {customer.name}</h3>
 
-            {content}
+            {/* {content} */}
 
             <hr />
 

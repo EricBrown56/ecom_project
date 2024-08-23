@@ -53,7 +53,7 @@ const deleteProduct = (productId) => {
                     </div>
                 ))}
 
-                <a className='btn btn-primary' href='http://localhost:5173/Add_Product' type='button'>Add</a>
+                
             </div>
         
         </>

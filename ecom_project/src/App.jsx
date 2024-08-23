@@ -24,7 +24,7 @@ function App() {
         <Route path='/Customers' element={<ViewCustomers />} />
         <Route path='/Customers/:id' element={<CustomerDetails />} />
         <Route path='/Products' element={<ViewProducts />} />
-        <Route path='/Add_Product' element={<AddProduct />} />
+        <Route path='/Add-Product' element={<AddProduct />} />
 
         <Route path='*' element={<NotFound />} />
       </Routes>

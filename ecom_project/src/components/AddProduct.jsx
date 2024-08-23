@@ -16,17 +16,9 @@ class Products extends Component {
         };
     }
 
-    validateForm = () => {
-        const { product_name, price } = this.state;
-        const errors = {};
-        if (!product_name) errors.product_name = 'Product name is required'
-        if (!price) errors.price = 'Price information is required'
-        return errors;
-    };
-
     handleSubmit = (event) => {
-        event.preventdefault();
-        const errors = this.validateform();
+        event.preventDefault();
+        const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
 
             this.setState({ isLoading: true, errors: null });
@@ -52,6 +44,16 @@ class Products extends Component {
         }
     };
 
+    validateForm = () => {
+        const { product_name, price } = this.state;
+        const errors = {};
+        if (!product_name) {errors.product_name = 'Product name is required'}
+        else {errors.product_name = ''}
+        if (!price) errors.price = 'Price information is required'
+        else {errors.price = ''}
+        return errors;
+    };
+
    
 
     handleChange = (event) => {
@@ -72,7 +74,7 @@ class Products extends Component {
     render() {
         const { product_name, price, isLoading, showSuccessModal, error, errors } = this.state;
 
-        return(
+        return (
             <Container>
                 {isLoading && <Alert variant='info'>Submitting product info...</Alert>}
                 {error && <Alert variant='danger'>Error submitting product: {error}</Alert>}
@@ -80,7 +82,7 @@ class Products extends Component {
                 <h4 className='mb-5'>Add Product Information</h4>
 
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId='productInfo'>
+                    <Form.Group controlId='formGroupProductName'>
                         <Form.Label>Product Name</Form.Label>
                         <Form.Control
                             type='text'
@@ -88,7 +90,7 @@ class Products extends Component {
                             value={product_name}
                             onChange={this.handleChange}
                             placeholder= 'Enter Product Name'
-                            isInvalid={errors.product_name} />
+                            isInvalid={errors.product_name ? true : false} />
                             {errors.product_name && <div style={{ color: 'red' }}>{errors.product_name}</div>}
                     </Form.Group>
 
@@ -100,7 +102,7 @@ class Products extends Component {
                             value={price}
                             onChange={this.handleChange}
                             placeholder='Enter Price'
-                            isInvalid={errors.price} />
+                            isInvalid={errors.price ? true : false} />
                             {errors.price && <div style={{ color: 'red' }}>{errors.price}</div>}
                     </Form.Group>
 
