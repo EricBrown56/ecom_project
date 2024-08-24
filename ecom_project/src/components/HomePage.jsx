@@ -2,6 +2,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+
+
+
+
+
+
 function HomePage() {
     return (
       <Container fluid='lg'>
@@ -17,12 +23,6 @@ function HomePage() {
             <p>If we don't have it, you don't want it!</p>
           </Col>
 
-        </Row>
-
-        <Row>
-
-        
-        
         </Row>
 
       </Container>

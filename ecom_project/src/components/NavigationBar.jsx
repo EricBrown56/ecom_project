@@ -8,6 +8,9 @@ function NavigationBar() {
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
                 <Nav className='mr-auto'>
+                    <Nav.Link as={NavLink} to='/Login' activeclassname='active'>
+                            Login
+                    </Nav.Link>
                     <Nav.Link as={NavLink} to='/Customers' activeclassname='active'>
                         View Customers
                     </Nav.Link>

@@ -10,6 +10,7 @@ import ViewCustomers from './components/ViewCustomers';
 import CustomerDetails from './components/CustomerDetails';
 import AddProduct from './components/AddProduct';
 import ViewProducts from './components/ViewProducts';
+import LoginForm from './components/LoginForm';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/Login' element={<LoginForm />} />
         <Route path='/Add-Customer' element={<CustomerForm />} />
         <Route path='/Customers' element={<ViewCustomers />} />
         <Route path='/Customers/:id' element={<CustomerDetails />} />
