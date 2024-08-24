@@ -4,19 +4,27 @@ import Col from 'react-bootstrap/Col';
 
 function HomePage() {
     return (
-      <Container>
+      <Container fluid='lg'>
 
-        <Row>
-          <img src='wacky_wally_logo.png' width='300' alt='Wacky Wally Logo'/>
-        </Row>
+        <Row className='header'>
 
-        <Row>
-          <Col>
+        <Col xs={2} >
+          <img src='wacky_wally_logo2.png' width='250' alt='Wacky Wally Logo'/>
+        </Col>
+
+          <Col className='mt-5'>
             <h1>Welcome to Wacky Wally's Electronic Wonderland</h1>
             <p>If we don't have it, you don't want it!</p>
           </Col>
+
         </Row>
+
+        <Row>
+
         
+        
+        </Row>
+
       </Container>
     );
     

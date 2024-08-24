@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 function NavigationBar() {
     return (
-        <Navbar bg='light' expand='md'>
+        <Navbar bg='light' expand='md'className='nav'>
             <Navbar.Brand href='/'>Wacky Wally's Electronic Wonderland</Navbar.Brand>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>

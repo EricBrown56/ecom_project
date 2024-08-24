@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import axios from 'axios';
 import { Button, Form, Modal, Alert, Container } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class CustomerForm extends Component {
 
@@ -24,7 +26,7 @@ class CustomerForm extends Component {
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
     
-            this.setState({ isLoading: true, errors: null });
+            this.setState({ isLoading: true, errors: {} });
     
             const customerData = {
                 name: this.state.name.trim(),

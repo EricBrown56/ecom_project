@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import axios from 'axios';
 import { Button, Form, Modal, Alert, Container} from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class Products extends Component {
     
@@ -21,7 +23,7 @@ class Products extends Component {
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
 
-            this.setState({ isLoading: true, errors: null });
+            this.setState({ isLoading: true, errors: {} });
 
             const productData = {
                 product_name: this.state.product_name.trim(),
