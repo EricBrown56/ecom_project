@@ -1,8 +1,8 @@
-# React + Vite
+Welcome to Wacky Wally's Electronic Wonderland. Once you login, you will be sent 
+to a welcome page that also acts as a edit customer option, right now the option
+is no working as expected. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+You can use any user name and password and it will take you to the welcome screen.
+From there you can visit the other pages and it should work as usual. Have a great 
+day.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

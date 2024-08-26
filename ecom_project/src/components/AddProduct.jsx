@@ -86,7 +86,7 @@ class Products extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId='formGroupProductName'>
                         <Form.Label>Product Name</Form.Label>
-                        <Form.Control
+                        <Form.Control autoFocus
                             type='text'
                             name='product_name'
                             value={product_name}
